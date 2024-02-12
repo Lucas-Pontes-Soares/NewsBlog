@@ -14,7 +14,7 @@ export default function App() {
 
       <div className="w-full text-center my-8">
         <button 
-          className="bg-neutral-800 rounded-md p-4 hover:ring-2 hover:ring-gray-200"
+          className="bg-neutral-800 rounded-md p-4 hover:ring-2 hover:ring-gray-200 "
           onClick={handleCreateArticle}
           >
             Criar Artigo

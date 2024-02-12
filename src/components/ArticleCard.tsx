@@ -4,7 +4,7 @@ export function ArticleCard() {
   const [showDescription, setShowDescription] = useState(false);
 
   function handleSeeArticle(){
-    console.log("teste")
+    window.location.href = "/article";
   }
 
   return (
@@ -20,7 +20,7 @@ export function ArticleCard() {
       onClick={() => handleSeeArticle()}
     >
       <div className="flex items-center">
-        Artigo
+        Title
       </div>
 
       {showDescription && (
