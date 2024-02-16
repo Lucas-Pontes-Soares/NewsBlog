@@ -3,7 +3,7 @@ import { GetArticles } from "./components/GetArticles";
 export default function App() {
 
   function handleCreateArticle(){
-
+    window.location.href = "/CreateArticle";
   }
 
   return (
