@@ -2,10 +2,9 @@ import { ChangeEvent, useState } from "react";
 import { SessionArticle } from "./SessionArticle";
 import { toast } from 'sonner'
 
-
 interface Session {
     id: string;
-  }
+}
 
 interface SessionValue {
     title: string;
@@ -26,7 +25,7 @@ export function CreateArticle() {
         }));
         
         setSession(prevSessions => [...prevSessions, ...updatedSessions]);
-      }
+    }
   
     function handleQuantidadeSessoesChange(event: React.ChangeEvent<HTMLInputElement>) {
       const quantidade = parseInt(event.target.value);
@@ -46,15 +45,21 @@ export function CreateArticle() {
     }
 
     function handleCreateArticle(){
-        const article = {
-            title: titleArticle,
-            description: description,
-            dateCreatedAt: new Date(),
-            session: sessionArray,
-          };
-          
-          console.log(article);
-          toast.success('Artigo criado com sucesso!')
+      const newArticle = {
+        id: crypto.randomUUID(),
+        title: titleArticle,
+        description: description,
+        dateCreatedAt: new Date(),
+        session: sessionArray,
+      };
+
+      const existingArticlesJSON = localStorage.getItem('articles');
+      const existingArticles = existingArticlesJSON ? JSON.parse(existingArticlesJSON) : [];
+
+      const updatedArticles = [...existingArticles, newArticle];
+
+      localStorage.setItem('articles', JSON.stringify(updatedArticles));
+      toast.success('Artigo criado com sucesso!')
     }
 
     function titleArticleChanged(event: ChangeEvent<HTMLInputElement>){
@@ -124,9 +129,9 @@ export function CreateArticle() {
                 </button>
             </div>
   
-          {session.map((session) => (
-            <SessionArticle key={session.id} onSessionChanged={onSessionChanged}/>
-          ))}
+            {session.map((session) => (
+              <SessionArticle key={session.id} onSessionChanged={onSessionChanged}/>
+            ))}
 
             <button 
                 onClick={handleCreateArticle}

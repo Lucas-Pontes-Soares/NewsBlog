@@ -8,7 +8,7 @@ export function NewsBlogRoutes() {
    return(
         <Routes>
                 <Route path="/" element={<App />} />
-                <Route path="/article" element={<Article />} />
+                <Route path="/article/:id" element={<Article />} />
                 <Route path="/CreateArticle" element={<CreateArticle />} />
         </Routes>
    )
