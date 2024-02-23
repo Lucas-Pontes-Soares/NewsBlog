@@ -24,7 +24,6 @@ export function Article(){
         if (data) {
           const dataArray: Article[] = JSON.parse(data);
           const item = dataArray.find(item => item.id === id);
-
           setArticle(item || null);
         }
 
@@ -43,8 +42,8 @@ export function Article(){
                 <div className="my-8">
                     {Object.keys(article.session).map((key) => (
                         <div key={key}>
-                            <li className="text-3xl font-bold mb-4 text-left">{article.session[key].title}</li>
-                            <p className="text-1xl mb-4 text-left px-4">{article.session[key].text}</p>
+                            <li className="text-3xl font-bold my-8 text-left">{article.session[key].title}</li>
+                            <p className="text-1xl my-8 mb-16 px-4 text-justify">{article.session[key].text}</p>
                         </div>
                     ))}
                 </div>

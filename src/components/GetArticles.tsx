@@ -48,15 +48,15 @@ export function GetArticles(){
                 <div className="flex-grow">
                 <input 
                     type="text"
-                    placeholder="Filtre aqui os artigos"
-                    className="w-2/6 p-1 text-gray-950"
+                    placeholder="Filtre aqui os artigos pelo título"
+                    className="w-full p-1 text-gray-950 sm:w-3/6"
                     onChange={handleSearch}
                 />
                 </div>
             </div>
 
             <h1 className="text-2xl font-bold">Artigos: </h1>
-            <h2>Passe o cursor por cima para ver o conteudo, ou clique para ler por completo.</h2>
+            <h2>Passe o cursor por cima para ver a descrição, ou clique para ler por completo.</h2>
 
             {filteredArticles.map((article) => (
                 <div className="mt-4" key={article.id}>

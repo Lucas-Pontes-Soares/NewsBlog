@@ -33,14 +33,14 @@ export function CreateArticle() {
     }
 
     function onSessionChanged(title: string, text: string){
-        const newNote = {
+        const newSession = {
             title: title,
             text: text,
         }
       
         console.log(title)
         console.log(text)
-        const sessionValue = [...sessionArray, newNote]
+        const sessionValue = [...sessionArray, newSession]
         setSessionArray(sessionValue)
     }
 
@@ -53,13 +53,17 @@ export function CreateArticle() {
         session: sessionArray,
       };
 
-      const existingArticlesJSON = localStorage.getItem('articles');
-      const existingArticles = existingArticlesJSON ? JSON.parse(existingArticlesJSON) : [];
-
-      const updatedArticles = [...existingArticles, newArticle];
-
-      localStorage.setItem('articles', JSON.stringify(updatedArticles));
-      toast.success('Artigo criado com sucesso!')
+      if(titleArticle == '' && description == '' && sessionArray.toString() == ''){
+        toast.error('Preencha todos os campos!')
+      } else {
+        const existingArticlesJSON = localStorage.getItem('articles');
+        const existingArticles = existingArticlesJSON ? JSON.parse(existingArticlesJSON) : [];
+  
+        const updatedArticles = [...existingArticles, newArticle];
+  
+        localStorage.setItem('articles', JSON.stringify(updatedArticles));
+        toast.success('Artigo criado com sucesso!')
+      }
     }
 
     function titleArticleChanged(event: ChangeEvent<HTMLInputElement>){
