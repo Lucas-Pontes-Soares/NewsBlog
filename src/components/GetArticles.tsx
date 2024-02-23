@@ -1,6 +1,6 @@
 import { Search } from "lucide-react"
 import { ArticleCard } from "./ArticleCard"
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 interface Article {
     id: string;
@@ -17,7 +17,8 @@ interface Article {
 
   
 export function GetArticles(){
-    const [articles, setArticles] = useState<Article[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     const articlesOnStorage = localStorage.getItem('articles');
@@ -28,6 +29,16 @@ export function GetArticles(){
     }
   }, []);
 
+  function handleSearch(event: ChangeEvent<HTMLInputElement>){
+    const query = event.target.value
+
+    setSearch(query)
+  }
+
+  const filteredArticles = search != ''
+    ? articles.filter(art => art.title.toLowerCase().includes(search.toLowerCase()))
+    : articles
+
     return(
         <div className="w-full bg-neutral-800 my-8 p-12 rounded-md h-auto">
             <div className="flex flex-row items-center mb-8"> 
@@ -37,8 +48,9 @@ export function GetArticles(){
                 <div className="flex-grow">
                 <input 
                     type="text"
-                    placeholder="Filtre aqui as notícias"
+                    placeholder="Filtre aqui os artigos"
                     className="w-2/6 p-1 text-gray-950"
+                    onChange={handleSearch}
                 />
                 </div>
             </div>
@@ -46,7 +58,7 @@ export function GetArticles(){
             <h1 className="text-2xl font-bold">Artigos: </h1>
             <h2>Passe o cursor por cima para ver o conteudo, ou clique para ler por completo.</h2>
 
-            {articles.map((article) => (
+            {filteredArticles.map((article) => (
                 <div className="mt-4" key={article.id}>
                     <ArticleCard article={article}/>
                 </div>
